@@ -21,3 +21,7 @@ yarn dev # npm run dev
 ```
 
 4. It will start your project on [http://localhost:5173/](http://localhost:5173/). Port can be different.
+
+## Demo
+
+You can also visit a demo site at [https://geers-workshop-dapp.vercel.app/](https://geers-workshop-dapp.vercel.app/).

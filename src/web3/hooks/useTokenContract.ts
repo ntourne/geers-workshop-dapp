@@ -7,29 +7,44 @@ import {
 import { useWeb3 } from "../context/Web3Context";
 
 type Values = {
-  mint: (to: string, amount: bigint) => Promise<void>;
+  mint: (to: string) => Promise<void>;
+  getName: () => Promise<string>;
 };
 
 export const useTokenContract = (): Values => {
   const { user } = useWeb3();
 
-  const mint = async (to: string, amount: bigint) => {
-    if (user?.chainId !== ERC20_CONTRACT_CHAINID) {
-      alert(
-        `Wrong network. You are on ${user?.chainId}. Please switch to ${ERC20_CONTRACT_CHAINID}`
-      );
-    }
-
-    console.log("debug - user", user?.chainId);
-
+  const getContractInstance = () => {
     const tokenContract = new Contract(
       ERC20_CONTRACT_ADDRESS,
       ERC20_CONTRACT_ABI,
       user?.signer
     );
-
-    await tokenContract.mint(to, amount);
+    return tokenContract;
   };
 
-  return { mint };
+  const mint = async (to: string) => {
+    if (user?.chainId !== ERC20_CONTRACT_CHAINID) {
+      alert(
+        `Wrong network. You are on ${user?.chainId}. Please switch to ${ERC20_CONTRACT_CHAINID}`
+      );
+      return;
+    }
+
+    const tokenContract = getContractInstance();
+
+    console.log("debug - user", user?.chainId);
+
+    await tokenContract.mint(to);
+  };
+
+  const getName = async () => {
+    const tokenContract = getContractInstance();
+
+    const name = await tokenContract.name();
+
+    return name;
+  };
+
+  return { mint, getName };
 };

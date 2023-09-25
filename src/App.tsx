@@ -1,5 +1,17 @@
+import LayoutMain from "@/layout/components/LayoutMain";
+import LayoutContainer from "@/layout/components/LayoutContainer";
+import LayoutHeader from "@/layout/components/LayoutHeader";
+
 function App() {
-  return <h1 className="text-3xl font-bold">Hello world!</h1>;
+  return (
+    <LayoutMain>
+      <LayoutHeader />
+
+      <LayoutContainer>
+        <div>Content here</div>
+      </LayoutContainer>
+    </LayoutMain>
+  );
 }
 
 export default App;

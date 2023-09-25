@@ -1,4 +1,9 @@
+import ConnectWalletButton from "@/web3/components/ConnectWalletButton";
+import UserIdentity from "@/web3/components/UserIdentity";
+import { useWeb3 } from "@/web3/context/Web3Context";
+
 const Header = () => {
+  const { user } = useWeb3();
   return (
     <header className="bg-white">
       <nav
@@ -14,7 +19,7 @@ const Header = () => {
         </div>
 
         <div className="lg:flex lg:flex-1 lg:justify-end">
-          ** user details **
+          {user ? <UserIdentity user={user} /> : <ConnectWalletButton />}
         </div>
       </nav>
     </header>

@@ -11,7 +11,7 @@ import {
   getBalance,
   getChainId,
   getProviderAndSigner,
-} from "../helpers/web3";
+} from "@/web3/helpers/web3";
 
 declare global {
   interface Window {

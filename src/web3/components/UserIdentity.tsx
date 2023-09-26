@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { User } from "../context/Web3Context";
+import { User } from "@/web3/context/Web3Context";
 
 type Props = {
   user: User;

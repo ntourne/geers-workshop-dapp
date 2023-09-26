@@ -1,4 +1,4 @@
-import { useWeb3 } from "../context/Web3Context";
+import { useWeb3 } from "@/web3/context/Web3Context";
 
 const ConnectWalletButton = () => {
   const { connect } = useWeb3();

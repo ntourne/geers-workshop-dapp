@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useTokenContract } from "../hooks/useTokenContract";
-import { useWeb3 } from "../context/Web3Context";
+import { useTokenContract } from "@/web3/hooks/useTokenContract";
+import { useWeb3 } from "@/web3/context/Web3Context";
 import LayoutCard from "@/layout/components/LayoutCard";
 
 const TokenMinter = () => {

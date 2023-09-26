@@ -3,8 +3,8 @@ import {
   ERC20_CONTRACT_ADDRESS,
   ERC20_CONTRACT_ABI,
   ERC20_CONTRACT_CHAINID,
-} from "../constants/contract";
-import { useWeb3 } from "../context/Web3Context";
+} from "@/web3/constants/contract";
+import { useWeb3 } from "@/web3/context/Web3Context";
 
 type Values = {
   mint: (to: string) => Promise<void>;
@@ -14,15 +14,6 @@ type Values = {
 export const useTokenContract = (): Values => {
   const { user } = useWeb3();
 
-  const getContractInstance = () => {
-    const tokenContract = new Contract(
-      ERC20_CONTRACT_ADDRESS,
-      ERC20_CONTRACT_ABI,
-      user?.signer
-    );
-    return tokenContract;
-  };
-
   const mint = async (to: string) => {
     if (user?.chainId !== ERC20_CONTRACT_CHAINID) {
       alert(
@@ -31,15 +22,21 @@ export const useTokenContract = (): Values => {
       return;
     }
 
-    const tokenContract = getContractInstance();
-
-    console.log("debug - user", user?.chainId);
+    const tokenContract = new Contract(
+      ERC20_CONTRACT_ADDRESS,
+      ERC20_CONTRACT_ABI,
+      user?.signer
+    );
 
     await tokenContract.mint(to);
   };
 
   const getName = async () => {
-    const tokenContract = getContractInstance();
+    const tokenContract = new Contract(
+      ERC20_CONTRACT_ADDRESS,
+      ERC20_CONTRACT_ABI,
+      user?.signer
+    );
 
     const name = await tokenContract.name();
 
